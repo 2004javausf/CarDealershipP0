@@ -1,79 +1,52 @@
 package com.revature.beans;
 
-public class Customer {
-    private int id;
-    private String firstName;
-    private String lastName;
+import java.util.ArrayList;
+
+public class Customer extends User {
+	//fields
+	private int custID;
     private String address;
     private String city;
+    private String state;
     private String postalCode;
     private String phoneNumber;
     private String email;
     private int creditScore;
     private double cashOnHand;
+    private ArrayList<Integer> carsOwned;
     private int deleted;
 
+    //Constructors
     public Customer() {
         super();
 
     }
 
+    public Customer(int custID, String address, String city, String state, String postalCode, String phoneNumber,
+			String email, int creditScore, double cashOnHand, ArrayList<Integer> carsOwned, int deleted) {
+		super();
+		this.custID = custID;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.postalCode = postalCode;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.creditScore = creditScore;
+		this.cashOnHand = cashOnHand;
+		this.carsOwned = carsOwned;
+		this.deleted = deleted;
+	}
 
-    public Customer(String firstName, String lastName, String address, String city, String postalCode, String phoneNumber, String email, double cashOnHand) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.cashOnHand = cashOnHand;
-        this.deleted = 0;
-    }
 
-    public Customer(int id, String firstName, String lastName, String address, String city, String postalCode, String phoneNumber, String email, double cashOnHand, int deleted) {
-        super();
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.cashOnHand = cashOnHand;
-        this.deleted = deleted;
+    //Getters and Setters
+    public int getCustID() {
+        return custID;
     }
 
 
-    public int getId() {
-        return id;
-    }
-
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-
-    public String getLastName() {
-        return lastName;
-    }
-
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCustID(int custID) {
+        this.custID = custID;
     }
 
 
@@ -97,6 +70,13 @@ public class Customer {
         this.city = city;
     }
 
+    public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 
     public String getPostalCode() {
         return postalCode;
@@ -132,9 +112,19 @@ public class Customer {
     }
 
     public void setCashOnHand(double cashOnHand){
-        cashOnHand += 500;
+        cashOnHand += 500.00;
         this.cashOnHand = cashOnHand;
     }
+    
+
+	public ArrayList<Integer> getCarsOwned() {
+		return carsOwned;
+	}
+
+	public void setCarsOwned(ArrayList<Integer> carsOwned) {
+		this.carsOwned = carsOwned;
+	}
+	
     public int getDeleted() {
         return deleted;
     }
@@ -155,8 +145,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+        		"custID= '" + custID + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", postalCode='" + postalCode + '\'' +

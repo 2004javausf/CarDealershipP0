@@ -5,6 +5,8 @@ public class User {
     private int userId;
     private String userName;
     private String password;
+    private String firstName;
+    private String lastName;
     private boolean isEmployee;
 
     //Constructors
@@ -12,13 +14,15 @@ public class User {
         super();
     }
 
-    public User(int userId, String userName, String password, boolean isEmployee) {
-        super();
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-        this.isEmployee = isEmployee;
-    }
+    public User(int userId, String userName, String password, String firstName, String lastName, boolean isEmployee) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isEmployee = isEmployee;
+	}
 
     //Getters and Setters
     public int getUserId() {
@@ -45,6 +49,22 @@ public class User {
         this.password = password;
     }
 
+    public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
     public boolean isEmployee() {
         return isEmployee;
     }
@@ -54,12 +74,8 @@ public class User {
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", isEmployee=" + isEmployee +
-                '}';
-    }
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", isEmployee=" + isEmployee + "]";
+	}
 }

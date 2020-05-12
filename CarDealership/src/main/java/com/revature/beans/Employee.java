@@ -1,21 +1,17 @@
 package com.revature.beans;
 
-public class Employee {
+public class Employee extends User {
     private int empId;
-    private String firstName;
-    private String lastName;
-    private int userID;
+    
 
     //Constructor Methods
     public Employee(){
         super();
     }
 
-    public Employee(int empId, String firstName, String lastName) {
+    public Employee(int empId) {
         super();
         this.empId = empId;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
 
@@ -28,36 +24,12 @@ public class Employee {
         this.empId = empId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
+    
     //to String
     @Override
     public String toString() {
         return "Employee{" +
-                "empId=" + empId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                "empId=" + empId  +
                 '}';
     }
 
