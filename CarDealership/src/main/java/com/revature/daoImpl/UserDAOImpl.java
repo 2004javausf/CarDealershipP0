@@ -20,11 +20,11 @@ public class UserDAOImpl implements UserDAO{
 			conn= cf.getConnection();
 			String sql= "INSERT INTO USER VALUES (USSEQ.NEXTVAL,?,?,?,?,?,?,?)";
 			ps=conn.prepareStatement(sql);
-			ps.setId(1, getUserId());
-			ps.setString(2, getUserName());
-			ps.setString(3, getPassword());
-			ps.setString(4, getFirstName());
-			ps.setString(5, getLastName());
+			ps.setInt(1, userId);
+			ps.setString(2, userName);
+			ps.setString(3, password);
+			ps.setString(4, firstName);
+			ps.setString(5, lastName);
 			ps.executeUpdate();
 			
 			LogThis.LogIt("info", "User is added to Dealership Database.");
