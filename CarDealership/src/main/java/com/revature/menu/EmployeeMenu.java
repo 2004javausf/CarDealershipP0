@@ -76,7 +76,7 @@ public class EmployeeMenu {
 			scan.nextLine();
 			String password = scan.nextLine();
 
-			cdi.employeeLogin(username, password);
+			cdi.employeeLogin();
 		}
 
 		else if (choice == 3) {
