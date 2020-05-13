@@ -80,7 +80,7 @@ public class CustomerMenu {
 			scan.nextLine();
 			String password = scan.nextLine();
 
-			cdi.createCustomer(customer_id, username, password, firstname, lastname,email, address, city, state, postal_code, credit_score, cash_on_hand, phone_number);
+			cdi.createCustomer(customer_id, username, password, firstname, lastname, email, address, city, state, postal_code, credit_score, cash_on_hand, phone_number);
 			
 			customer_id = cdi.getCustomeridByUserName(username);
 
@@ -93,12 +93,12 @@ public class CustomerMenu {
 			System.out.println("We are glad you are logining");
 			
 			System.out.println("Please enter your username: ");
-			String username = scan.next();
+			String username = scan.nextLine();
 			System.out.println("Please enter your password: ");
 			scan.nextLine();
 			String password = scan.nextLine();
 			
-			customer_id = cdi.customerLogin(username, password);
+			customer_id = cdi.customerLogin();
 			
 			System.out.println(customer_id);
 		}
