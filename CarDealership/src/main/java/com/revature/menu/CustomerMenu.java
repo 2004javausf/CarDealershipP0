@@ -98,7 +98,7 @@ public class CustomerMenu {
 			scan.nextLine();
 			String password = scan.nextLine();
 			
-			customer_id = cdi.customerLogin();
+			customer_id = cdi.customerLogin(username, password);
 			
 			System.out.println(customer_id);
 		}

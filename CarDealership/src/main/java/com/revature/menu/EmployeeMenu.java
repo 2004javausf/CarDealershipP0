@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.revature.beans.Car;
 import com.revature.beans.CustomerBid;
 import com.revature.beans.DealerPayments;
+import com.revature.dao.CustomerBidDAO;
 import com.revature.daoImpl.CarDAOImpl;
 import com.revature.daoImpl.CustomerBidDAOImpl;
 import com.revature.daoImpl.DealerPaymentsDAOImpl;
@@ -143,12 +144,12 @@ public class EmployeeMenu {
 
 			int bid_id = scan.nextInt();
 
-			CustomerBid bid = customerBidDAOImpl.getBidById(bid_id);
+			CustomerBid bid = customerBidsDAOImpl.getBidById(bid_id);
 
 			if (bid == null) {
 				System.out.println("Invalid bid id given");
 			} else {
-				customerBidDAOImpl.acceptCustomerBid(bid_id);
+				customerBidsDAOImpl.acceptCustomerBid(bid_id);
 				System.out.println("Successfully accept a bid");
 			}
 
@@ -160,12 +161,12 @@ public class EmployeeMenu {
 			
 			int bid_id = scan.nextInt();
 
-			CustomerBid bid = customerBidDAOImpl.getBidById(bid_id);
+			CustomerBid bid = customerBidsDAOImpl.getBidById(bid_id);
 
 			if (bid == null) {
 				System.out.println("Invalid bid id given");
 			} else {
-				customerBidDAOImpl.rejectBid(bid_id);
+				customerBidsDAOImpl.rejectBid(bid_id);
 				System.out.println("Successfully rejected a bid");
 			}
 

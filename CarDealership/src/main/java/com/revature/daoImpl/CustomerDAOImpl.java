@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import com.revature.beans.CustomerBid;
 import com.revature.dao.CustomerDAO;
 import com.revature.util.ConnFactory;
 import com.revature.util.LogThis;
@@ -49,18 +50,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 	
 	@Override
-	public void customerLogin() {
+	public int customerLogin(String username, String password) {
 
 		Scanner scanner = new Scanner(System.in);
 		try {
-			System.out.println("Please enter your username: ");
-			String username = scanner.next();
-			System.out.println("Please enter your password: ");
-			String password = scanner.nextLine();
+			
 			Connection conn = cf.getConnection();
 			Statement stm = conn.createStatement();
-			String sql = "SELECT username, password FROM customer WHERE customer_id = " + "'" + username + "'"
+			String sql = "SELECT username, password FROM customer WHERE username = " + "'" + username + "'"
 					+ " AND password = '" + password + "'";
+			
+			System.out.println(sql);
 			ResultSet rs = stm.executeQuery(sql);
 			if (rs.next() == false) {
 				System.out.println("Incorrect username or password.");
@@ -73,5 +73,34 @@ public class CustomerDAOImpl implements CustomerDAO {
 		} finally {
 			scanner.close();
 		}
+		
+		return getCustomeridByUserName(username);
+
 	}
+
+	@Override
+	public int getCustomeridByUserName(String username) {
+		
+
+		CustomerBid bid = new CustomerBid();
+		try {
+			conn = cf.getConnection();
+			String sql = "SELECT * FROM customer where username = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				bid.setCustomer_id(rs.getInt("customer_id"));
+			
+
+			}
+			return bid.getCustomer_id();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	
 }
