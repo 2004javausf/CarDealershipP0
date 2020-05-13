@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 
+import com.revature.beans.CustomerBid;
 import com.revature.dao.EmployeeDAO;
 import com.revature.util.ConnFactory;
 import com.revature.util.LogThis;
@@ -35,31 +35,49 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	@Override
-	public void employeeLogin() {
 
-		Scanner scanner = new Scanner(System.in);
+	@Override
+	public void employeeLogin(String username, String password) {
+
 		try {
-			System.out.println("Please enter your username: ");
-			String username = scanner.next();
-			System.out.println("Please enter your password: ");
-			String password = scanner.nextLine();
+
 			Connection conn = cf.getConnection();
 			Statement stm = conn.createStatement();
-			String sql = "SELECT username, password FROM employee WHERE customer_id = " + "'" + username + "'"
+			String sql = "SELECT username, password FROM employee WHERE username = " + "'" + username + "'"
 					+ " AND password = '" + password + "'";
 			ResultSet rs = stm.executeQuery(sql);
 			if (rs.next() == false) {
-				System.out.println("Incorrect customer ID or password.");
+				System.out.println("Incorrect username or password.");
 			} else {
-				System.out.println("Welcome Customer");
-				LogThis.LogIt("info", "Customer " + username + " is logged in");
+				System.out.println("Welcome Employee");
+				LogThis.LogIt("info", "Employee " + username + " is logged in");
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} finally {
-			scanner.close();
+		}
+	}
+	
+	@Override
+	public int getEmployeeidByUserName(String username) {
+		
+
+		CustomerBid bid = new CustomerBid();
+		try {
+			conn = cf.getConnection();
+			String sql = "SELECT * FROM employee where username = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				bid.setCustomer_id(rs.getInt("employee_id"));
+			
+
+			}
+			return bid.getCustomer_id();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 	}
 }

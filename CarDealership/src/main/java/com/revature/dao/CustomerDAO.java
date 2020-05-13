@@ -7,4 +7,5 @@ public interface CustomerDAO {
 	public int customerLogin(String username, String password);
 	
 	public int getCustomeridByUserName(String username);
+
 }

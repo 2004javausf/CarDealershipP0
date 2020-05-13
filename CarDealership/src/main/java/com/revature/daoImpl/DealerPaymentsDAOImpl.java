@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +21,21 @@ public class DealerPaymentsDAOImpl implements DealerPaymentsDAO {
 	Connection conn;
 
 	@Override
-	public void createPayment(int bid_id, int customer_id, int car_id, double amount, Date payment_date) {
+	public void createPayment(int customer_id, int car_id, double amount) {
 
 		try {
 			conn = cf.getConnection();
-			String sql = "INSERT INTO dealer_payments(bid_id, customer_id, car_id, amount, payment_date) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO dealer_payments( customer_id, car_id, amount, payment_date) VALUES (?,?,?,?)";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
-			ps.setLong(1, bid_id);
+
+			ps.setLong(1, customer_id);
 			ps.setLong(2, car_id);
 
-			ps.setLong(3, customer_id);
-			ps.setDouble(4, amount);
+			ps.setDouble(3, amount);
 
-			ps.setDate(5, payment_date);
+			ps.setDate(4, new Date(System.currentTimeMillis()));
 
 			ps.executeUpdate();
 
@@ -58,8 +59,12 @@ public class DealerPaymentsDAOImpl implements DealerPaymentsDAO {
 			LocalDate firstOfMonth = yearMonth.atDay( 1 );
 			LocalDate last = yearMonth.atEndOfMonth();
 			
-			ps.setDate(1, new java.sql.Date(firstOfMonth.toEpochDay()));
-			ps.setDate(2, new java.sql.Date(last.toEpochDay()));
+			
+			
+			ps.setDate(1, new java.sql.Date(firstOfMonth.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()));
+			ps.setDate(2, new java.sql.Date(last.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()));
+			
+			System.out.println(ps.toString());
 			
 			ResultSet rs = ps.executeQuery();
 
@@ -68,7 +73,6 @@ public class DealerPaymentsDAOImpl implements DealerPaymentsDAO {
 
 				payment.setCar_id(rs.getInt("car_id"));
 				payment.setAmount(rs.getDouble("amount"));
-				payment.setBid_id(rs.getInt("bid_id"));
 				payment.setPayment_id(rs.getInt("payment_id"));
 				payment.setCustomer_id(rs.getInt("customer_id"));
 
@@ -102,9 +106,10 @@ public class DealerPaymentsDAOImpl implements DealerPaymentsDAO {
 
 				payment.setCar_id(rs.getInt("car_id"));
 				payment.setAmount(rs.getDouble("amount"));
-				payment.setBid_id(rs.getInt("bid_id"));
 				payment.setPayment_id(rs.getInt("payment_id"));
 				payment.setCustomer_id(rs.getInt("customer_id"));
+				payment.setPayment_date(rs.getDate("payment_date"));
+
 
 				payments.add(payment);
 			}

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class CreateCarTest {
 	
 	@Test
-	void displayCarsTest() {
+	void createCarTest() {
 		assertEquals();
 	}
 

@@ -143,7 +143,8 @@ public class CarDAOImpl implements CarDAO {
 			}
 			return car;
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			System.out.println(e);
+			return null;
 		}
 	}
 }

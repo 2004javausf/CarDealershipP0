@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.sql.Date;
+
 public class DealerPayments {
 
 	private int payment_id;
@@ -12,9 +14,9 @@ public class DealerPayments {
 
 	private double amount;
 
-	private double payment_date;
+	private Date payment_date;
 	
-	public DealerPayments(int payment_id, int bid_id, int customer_id, int car_id, double amount, double payment_date) {
+	public DealerPayments(int payment_id, int bid_id, int customer_id, int car_id, double amount, Date payment_date) {
 		super();
 		this.payment_id = payment_id;
 		this.bid_id = bid_id;
@@ -68,12 +70,12 @@ public class DealerPayments {
 		this.amount = amount;
 	}
 
-	public double getPayment_date() {
+	public Date getPayment_date() {
 		return payment_date;
 	}
 
-	public void setPayment_date(double payment_date) {
-		this.payment_date = payment_date;
+	public void setPayment_date(Date date) {
+		this.payment_date = date;
 	}
 
 	@Override

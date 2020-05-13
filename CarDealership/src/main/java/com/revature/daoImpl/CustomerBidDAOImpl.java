@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.CustomerBid;
 import com.revature.dao.CustomerBidDAO;
@@ -15,11 +17,11 @@ public class CustomerBidDAOImpl implements CustomerBidDAO {
 	Connection conn;
 
 	@Override
-	public void createCustomerBid(int car_id, int customer_id,  double offer_made) {
+	public void createCustomerBid(int car_id, int customer_id, double offer_made) {
 
 		try {
 			conn = cf.getConnection();
-			String sql = "INSERT INTO customer_bid( car_id, customer_id, months, offer_made) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO customer_bid( car_id, customer_id, months, offer_made) VALUES (?,?,?,?)";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -54,11 +56,13 @@ public class CustomerBidDAOImpl implements CustomerBidDAO {
 	public void acceptCustomerBid(int bid_id) {
 
 		CustomerOwnedCarsDAOImpl s = new CustomerOwnedCarsDAOImpl();
+		DealerPaymentsDAOImpl d = new DealerPaymentsDAOImpl();
 
 		CustomerBid bid = getBidById(bid_id);
 		removeCarFromAllBids(bid.getCar_id());
 
 		s.addCarToCustomer(bid.getCustomer_id(), bid.getCar_id(), bid.getOffer_made(), false);
+		d.createPayment(bid.getCustomer_id(), bid.getCar_id(), bid.getOffer_made());
 	}
 
 	@Override
@@ -78,7 +82,7 @@ public class CustomerBidDAOImpl implements CustomerBidDAO {
 	@Override
 	public CustomerBid getBidById(int bid_id) {
 
-		CustomerBid bid = new CustomerBid();
+		CustomerBid bid = null;
 		try {
 			conn = cf.getConnection();
 			String sql = "SELECT * FROM customer_bid where bid_id = ?";
@@ -88,6 +92,10 @@ public class CustomerBidDAOImpl implements CustomerBidDAO {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
+				bid = new CustomerBid();
+				
+				
+				bid = new CustomerBid();
 				bid.setCar_id(rs.getInt("car_id"));
 				bid.setCustomer_id(rs.getInt("customer_id"));
 				bid.setBid_id(rs.getInt("bid_id"));
@@ -100,9 +108,39 @@ public class CustomerBidDAOImpl implements CustomerBidDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
+	@Override
+	public List<CustomerBid> getAllBids() {
+		List<CustomerBid> bids = new ArrayList<CustomerBid>();
+		try {
+			conn = cf.getConnection();
+			String sql = "SELECT * FROM customer_bid";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				CustomerBid bid = new CustomerBid();
+				
+				
+				bid = new CustomerBid();
+				bid.setCar_id(rs.getInt("car_id"));
+				bid.setCustomer_id(rs.getInt("customer_id"));
+				bid.setBid_id(rs.getInt("bid_id"));
+				bid.setOffer_made(rs.getDouble("offer_made"));
+				bid.setMonths(rs.getInt("months"));
+				
+				bids.add(bid);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return bids;
+	}
+
 	@Override
 	public void rejectBid(int bid) {
-		
+
 		conn = cf.getConnection();
 		try {
 			PreparedStatement stmt = conn.prepareStatement("delete from customer_bid where bid_id =?");

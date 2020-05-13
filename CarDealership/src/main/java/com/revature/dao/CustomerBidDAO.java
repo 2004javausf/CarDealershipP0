@@ -1,5 +1,7 @@
 package com.revature.dao;
 
+import java.util.List;
+
 import com.revature.beans.CustomerBid;
 
 public interface CustomerBidDAO {
@@ -15,5 +17,7 @@ public interface CustomerBidDAO {
 	public CustomerBid getBidById(int bid_id);
 	
 	public void rejectBid(int bid);
+	
+	public List<CustomerBid> getAllBids();
 
 }

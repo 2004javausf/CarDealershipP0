@@ -1,7 +1,7 @@
 package com.revature.beans;
 
 public class Car {
-	//fields
+
 	private int car_id;
 
 	private String vin_number;
@@ -30,8 +30,13 @@ public class Car {
 		this.current_status = current_status;
 	}
 
-	
-//Constructors
+	@Override
+	public String toString() {
+		return "Car [car_id=" + car_id + ", vin_number=" + vin_number + ", make=" + make + ", model=" + model
+				+ ", mileage=" + mileage + ", year=" + year + ", price=" + price + ", rate=" + rate
+				+ ", monthly_payment=" + monthly_payment + ", current_status=" + current_status + "]";
+	}
+
 	public Car() {
 		super();
 	}
@@ -51,7 +56,6 @@ public class Car {
 		this.current_status = current_status;
 	}
 
-	//getter and setter methods
 	public int getCar_id() {
 		return car_id;
 	}
@@ -122,14 +126,6 @@ public class Car {
 
 	public void setMonthly_payment(double monthly_payment) {
 		this.monthly_payment = monthly_payment;
-	}
-	
-	//to string Method
-	@Override
-	public String toString() {
-		return "Car [car_id=" + car_id + ", vin_number=" + vin_number + ", make=" + make + ", model=" + model
-				+ ", mileage=" + mileage + ", year=" + year + ", price=" + price + ", rate=" + rate
-				+ ", monthly_payment=" + monthly_payment + ", current_status=" + current_status + "]";
 	}
 
 }
