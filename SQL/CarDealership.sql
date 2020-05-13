@@ -22,82 +22,98 @@ conn cardealer/Qu1etH0ur
 --
 --USE CarDealership;
 
+
+
 CREATE TABLE car_dealership.`customer` (
-  `customer_id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR2(255) DEFAULT NULL,
-  `firstname` VARCHAR2(255) DEFAULT NULL,
-  `lastname` VARCHAR2(255) DEFAULT NULL,
-   `email` VARCHAR2(255) DEFAULT NULL,
-   `address` VARCHAR2(255) DEFAULT NULL,
-  `city` VARCHAR2(255) DEFAULT NULL,
-  `state` VARCHAR2(255) DEFAULT NULL,
-  `postal_code` VARCHAR2(255) DEFAULT NULL,
-  `phone_number` VARCHAR2(255) DEFAULT NULL,
-  `credit_score` DOUBLE DEFAULT NULL,
-  `cash_on_hand` DOUBLE DEFAULT NULL,
-  `password` VARCHAR2(255) DEFAULT NULL,
+  `customer_id` int NOT NULL,
+  `username` varchar2(255) DEFAULT NULL,
+  `firstname` varchar2(255) DEFAULT NULL,
+  `lastname` varchar2(255) DEFAULT NULL,
+   `email` varchar2(255) DEFAULT NULL,
+   `address` varchar2(255) DEFAULT NULL,
+  `city` varchar2(255) DEFAULT NULL,
+  `state` varchar2(255) DEFAULT NULL,
+  `postal_code` varchar2(255) DEFAULT NULL,
+  `phone_number` varchar2(255) DEFAULT NULL,
+  `credit_score` double DEFAULT NULL,
+  `cash_on_hand` double DEFAULT NULL,
+  `password` varchar2(255) DEFAULT NULL,
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE car_dealership.`employee` (
-  `employee_id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR2(255) DEFAULT NULL,
-  `firstname` VARCHAR2(255) DEFAULT NULL,
-  `lastname` VARCHAR2(255) DEFAULT NULL,
-  `password` VARCHAR2(255) DEFAULT NULL,
+  `employee_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar2(255) DEFAULT NULL,
+  `firstname` varchar2(255) DEFAULT NULL,
+  `lastname` varchar2(255) DEFAULT NULL,
+  `password` varchar2(255) DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 CREATE TABLE `car_dealership`.`car` (
-    `car_id` INT NOT NULL AUTO_INCREMENT,
-    `vin_number` VARCHAR(255) DEFAULT NULL,
+    `car_id` int NOT NULL AUTO_INCREMENT,
+    `vin_number` VARCHAR2(255) DEFAULT NULL,
     `make` VARCHAR2(255) DEFAULT NULL,
     `model` VARCHAR2(255) DEFAULT NULL,
 	`mileage` INT DEFAULT NULL,
 	`year` INT DEFAULT NULL,
-    `price` DOUBLE DEFAULT NULL,
-    `rate` DOUBLE DEFAULT NULL,
-	`monthly_payment` DOUBLE DEFAULT NULL,
-    `current_status` VARCHAR2(255) DEFAULT NULL,
+    `price` double DEFAULT NULL,
+    `rate` double DEFAULT NULL,
+	`monthly_payment` double DEFAULT NULL,
+    `current_status` VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY (`car_id`)
 );
 
 
-CREATE TABLE `car_dealership`.`customer_bids` (
-    `bid_id` INT NOT NULL AUTO_INCREMENT,
-	`car_id` INT NOT NULL,
-    `months` INT NOT NULL,
-    `customer_id` int NOT NULL,
+CREATE TABLE `car_dealership`.`customer_bid` (
+    `bid_id` int NOT NULL AUTO_INCREMENT,
+	`car_id` int NOT NULL,
+	`customer_id` int NOT NULL,
+    `months` int NOT NULL,
     `offer_made` double NOT NULL,
     FOREIGN KEY (car_id) REFERENCES car(car_id),
-	FOREIGN KEY (customer_id) REFERENCES car(customer_id),
+	FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
     PRIMARY KEY (`bid_id`)
 );
 
 
 CREATE TABLE `car_dealership`.`customer_owned_cars` (
-    `customer_id` INT NOT NULL,
-	`car_id` INT NOT NULL,
-    `amount` DOUBLE NOT NULL,
+    `customer_id` int NOT NULL,
+	`car_id` int NOT NULL,
+    `amount` double NOT NULL,
     `is_payment_made` boolean NOT NULL,
 	FOREIGN KEY (car_id) REFERENCES car(car_id),
     PRIMARY KEY (`customer_id`,`car_id`)
 );
 
 CREATE TABLE `car_dealership`.`dealer_payments` (
-    `payment_id` INT NOT NULL AUTO_INCREMENT,
-    `bid_id` INT NOT NULL,
+    `payment_id` int NOT NULL AUTO_INCREMENT,
+    `bid_id` int NOT NULL,
 	`customer_id` int NOT NULL,
-    `amount` DOUBLE NOT NULL,
-    `payment_date` DATE NOT NULL,
+    `amount` double NOT NULL,
+    `payment_date` date NOT NULL,
 	FOREIGN KEY (bid_id) REFERENCES bid(bid_id),
 	FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
     PRIMARY KEY (`payment_id`)
 );
 
 
-SELECT * FROM `car_dealership`.`customer`;
+select * from `car_dealership`.`customer`;
+
+select * from `car_dealership`.`car`;
+select * from `car_dealership`.`customer_bid`;
+
+
+INSERT INTO car(vin_number, make, model, mileage, year, price, rate, monthly_payment, current_status) 
+VALUES ('vin-1', 'X-5', 'BMW', 60, 2020, 200000, 100, 10, 'IN_LOT');
+
+INSERT INTO car(vin_number, make, model, mileage, year, price, rate, monthly_payment, current_status) 
+VALUES ('vin-2', 'X-5', 'BMW', 60, 2020, 200000, 100, 10, 'NOT_IN_LOT');
+
+
+INSERT INTO car(vin_number, make, model, mileage, year, price, rate, monthly_payment, current_status) 
+VALUES ('vin-3', 'X-5', 'BMW', 60, 2020, 200000, 100, 10, 'TAKEN');

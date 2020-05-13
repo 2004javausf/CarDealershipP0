@@ -1,95 +1,174 @@
 package com.revature.menu;
 
-import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
-import com.revature.beans.Customer;
+import com.revature.beans.Car;
+import com.revature.beans.CustomerOwnedCars;
+import com.revature.daoImpl.CarDAOImpl;
+import com.revature.daoImpl.CustomerBidDAOImpl;
 import com.revature.daoImpl.CustomerDAOImpl;
-import com.revature.util.LogThis;
+import com.revature.daoImpl.CustomerOwnedCarsDAOImpl;
 
 public class CustomerMenu {
-
-	Customer cust = new Customer();
 	CustomerDAOImpl cdi = new CustomerDAOImpl();
-	String choice;
+	CarDAOImpl carDAOImpl = new CarDAOImpl();
+	CustomerBidDAOImpl customerBidsDAOImpl = new CustomerBidDAOImpl();
+	CustomerOwnedCarsDAOImpl customerOwnedCarsDAOImpl = new CustomerOwnedCarsDAOImpl();
+	
+	public static void main(String args[]) {
+		CustomerMenu s = new CustomerMenu();
+		s.render();
+	}
 
+	public void render() {
+		Scanner scan = new Scanner(System.in);
 
-	public void render(Scanner sc) {
 		System.out.println("Welcome Customer what would you like to do?");
 		System.out.println("Please select option from the menu.");
 		System.out.println("1: Create new account");
 		System.out.println("2: Login");
-		choice = sc.nextLine();
+		System.out.println("3: Cars on lot");
+		System.out.println("4: Make an offer for a car");
+		System.out.println("5: My list of cars you");
+		System.out.println("6: My remaining payments");
+		int choice = scan.nextInt();
 		
-		if(choice.equals("1")) {
-			String userName;
-			String password;
-			String firstName;
-			String lastName;
-			String address;
-			String city;
-			String state;
-			String postalCode;
-			String phoneNumber;
-			String email;
-			int creditScore;
-			double cashOnHand;
-			
-			
+		int customer_id = 0;
+		
+		System.out.println("Choice  " + choice);
+
+		if (choice == 1) {
+
 			System.out.println("We are glad you are joining");
-			System.out.println("What would you like your username to be?");
-			userName = sc.nextLine();
+
+			System.out.println("What is your username?");
+			scan.nextLine();
+			String username = scan.nextLine();
+
+			System.out.println("What is your firstname?");
+			String firstname = scan.nextLine();
+
+			System.out.println("What is your lastname?");
+			String lastname = scan.nextLine();
+
+			System.out.println("What is your email?");
+			String email = scan.nextLine();
+
+			System.out.println("What is your address?");
+			String address = scan.nextLine();
+
+			System.out.println("What is your city?");
+			String city = scan.nextLine();
+
+			System.out.println("What is your state?");
+			String state = scan.nextLine();
+
+			System.out.println("What is your postal_code?");
+			String postal_code = scan.nextLine();
+
+			System.out.println("What is your phone_number?");
+			String phone_number = scan.nextLine();
+
+			System.out.println("What is your credit_score?");
+			int credit_score = scan.nextInt();
+
+			System.out.println("What is your cash_on_hand?");
+			double cash_on_hand = scan.nextDouble();
+
 			System.out.println("What would you like your password to be?");
-			password = sc.nextLine();
-			System.out.println("What is your first name?");
-			firstName = sc.nextLine();
-			System.out.println("What is your last name?");
-			lastName = sc.nextLine();
-			System.out.println("What is your address to be?");
-			address = sc.nextLine();
-			System.out.println("Which city do you live in?");
-			city = sc.nextLine();
-			System.out.println("Which state do you live in?");
-			state = sc.nextLine();
-			System.out.println("What is your postal code?");
-			postalCode = sc.nextLine();
-			System.out.println("What is your phone number?");
-			phoneNumber = sc.nextLine();
-			System.out.println("What is your email address?");
-			email = sc.nextLine();
-			System.out.println("What is your credit score?");
-			creditScore = sc.nextInt();
-			System.out.println("How much money do you wish to put down on the car?");
-			cashOnHand = sc.nextDouble();
+			scan.nextLine();
+			String password = scan.nextLine();
+
+			cdi.createCustomer(customer_id, username, password, firstname, lastname,email, address, city, state, postal_code, credit_score, cash_on_hand, phone_number);
 			
-			try {
-				cdi.createCustomer(userName, password,firstName,lastName, address,city, state, postalCode, phoneNumber,
-						email, creditScore, cashOnHand);
-				System.out.println("The new account for: " + firstName + " " + lastName + " has been created.");
-				LogThis.LogIt("info", "Customer " + userName);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+			customer_id = cdi.getCustomeridByUserName(username);
+
+
+			System.out.println("Thanks for signing up!");
+
 		}
-		
-		else if (choice.equals("2")) {
-//			return CustomerDAO.customerLogin().render(sc);
-			try {
-				CustomerDAOImpl.customerLogin();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+		else if (choice == 2) {
+			System.out.println("We are glad you are logining");
+			
+			System.out.println("Please enter your username: ");
+			String username = scan.next();
+			System.out.println("Please enter your password: ");
+			scan.nextLine();
+			String password = scan.nextLine();
+			
+			customer_id = cdi.customerLogin(username, password);
+			
+			System.out.println(customer_id);
+		}
+
+		else if (choice == 3) {
+			List<Car> cars = carDAOImpl.getCarsOnLot();
+			System.out.println("Here are the cars on the lot");
+			
+			for(Car c : cars) {
+				System.out.println(c);
 			}
 		}
-		
+
+		else if (choice == 4) {
+			System.out.println("OK you can make offer on a car");
+
+			System.out.println("Which car ?");
+
+			int car_id = scan.nextInt();
+			
+			Car car = carDAOImpl.getCarById(car_id);
+			
+			if (car == null || !car.getCurrent_status().equals("IN_LOT")) {
+				System.out.println("This car is not present in the lot");
+			}
+			else {
+			System.out.println("What is the offer?");
+			double offer_made = scan.nextDouble();
+			
+			
+			
+			customerBidsDAOImpl.createCustomerBid(car_id, customer_id, offer_made);
+			System.out.println("Successfully created a bid");}
+		}
+
+		else if (choice == 5) {
+			System.out.println("Here is the list of cars you own");
+			List<CustomerOwnedCars> cars = customerOwnedCarsDAOImpl.getCustomerCars(customer_id);
+			
+			if(cars.isEmpty()) {
+				System.out.println("You dont own any cars");
+			}
+			else {
+				System.out.println("The cars you own");
+
+				for (CustomerOwnedCars c : cars) {
+					System.out.println(c);
+				}
+			}
+		}
+
+		else if (choice == 6) {
+			System.out.println("Here is the list of remaining payments");
+			List<CustomerOwnedCars> cars = customerOwnedCarsDAOImpl.getLeftOverPayments(customer_id);
+			
+			if(cars.isEmpty()) {
+				System.out.println("You dont have any payments");
+			}
+			else {
+				System.out.println("Here are the pending payments");
+
+				for (CustomerOwnedCars c : cars) {
+					System.out.println(c);
+				}
+			}
+		}
+
 		else {
 			System.out.println("Invalid Entry");
-//			return new CustomerMenu().render(sc);
 		}
-		
-		System.out.println("Thanks for signing up!");
-//		return new DealershipMenu().render(sc);
+		scan.close();
 	}
-
 }
