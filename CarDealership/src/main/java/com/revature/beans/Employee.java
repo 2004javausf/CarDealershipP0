@@ -1,55 +1,73 @@
 package com.revature.beans;
 
-public class Employee extends User {
-    private int empId;
-    
+public class Employee {
 
-    //Constructor Methods
-    public Employee(){
-        super();
-    }
+	private int employee_id;
 
-    public Employee(int empId) {
-        super();
-        this.empId = empId;
-    }
+	private String username;
 
+	private String firstname;
 
-    //getters and setters
-    public int getEmpId() {
-        return empId;
-    }
+	private String lastname;
 
-    public void setEmpId(int empId) {
-        this.empId = empId;
-    }
+	private String password;
 
-    
-    //to String
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "empId=" + empId  +
-                '}';
-    }
+	
+	public Employee() {
+		super();
+	}
+	public Employee(int employee_id, String username, String firstname, String lastname, String password) {
+		super();
+		this.employee_id = employee_id;
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.password = password;
+	}
 
-    public void handleCustomer(Customer customer, boolean finance, Car car){
-        if(finance == true){
-            double loanAmount = car.getPrice() - customer.getCashOnHand();
-            runCreditHistory(customer, loanAmount);
-        }else if(car.getPrice() <= customer.getCashOnHand()){
-            //customer pays in cash
-            processTransaction(customer, car);
-        }else {
-            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " will need more money to purchase " + car + ".");
-        }
-    }
+	public int getEmployee_id() {
+		return employee_id;
+	}
 
-    public void runCreditHistory(Customer customer, double loanAmount){
-        System.out.println("Customer's Credit history was ran.");
-        System.out.println("Customer has been approved to purchase the car.");
-    }
-    public void processTransaction(Customer customer, Car car){
-        System.out.println("Customer has purchased the car: " + car + " for the price: $" + car.getPrice());
-    }
+	public void setEmployee_id(int employee_id) {
+		this.employee_id = employee_id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [employee_id=" + employee_id + ", username=" + username + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", password=" + password + "]";
+	}
 }

@@ -1,155 +1,135 @@
-	package com.revature.beans;
+package com.revature.beans;
 
-	public class Car{
-	    //fields
-		private String owner;
-	    private int VIN;
-	    private String model;
-	    private String make;
-	    private int year;
-	    private int mileage;
-	    private double price;
-	    private double rate;
-	    private double monthlyPayment;
-	    
-	//Constructors
-	    public Car() {};   // no args constructor
-	    public Car(String owner, int vIN, String model, String make, int year, int mileage, double price, double rate,
-				double monthlyPayment) {
-			super();
-			this.owner = owner;
-			VIN = vIN;
-			this.model = model;
-			this.make = make;
-			this.year = year;
-			this.mileage = mileage;
-			this.price = price;
-			this.rate = rate;
-			this.monthlyPayment = monthlyPayment;
-		}
-	    
+public class Car {
+	//fields
+	private int car_id;
 
-	    //Getters and Setters
-	    public String getOwner() {
-			return owner;
-		}
-		public void setOwner(String owner) {
-			this.owner = owner;
-		}
-		public int getVIN() {
-			return VIN;
-		}
-		public void setVIN(int vIN) {
-			VIN = vIN;
-		}
-		public String getModel() {
-			return model;
-		}
-		public void setModel(String model) {
-			this.model = model;
-		}
-		public String getMake() {
-			return make;
-		}
-		public void setMake(String make) {
-			this.make = make;
-		}
-		public int getYear() {
-			return year;
-		}
-		public void setYear(int year) {
-			this.year = year;
-		}
-		public int getMileage() {
-			return mileage;
-		}
-		public void setMileage(int mileage) {
-			this.mileage = mileage;
-		}
-		public double getPrice() {
-			return price;
-		}
-		public void setPrice(double price) {
-			this.price = price;
-		}
-		public double getRate() {
-			return rate;
-		}
-		public void setRate(double rate) {
-			this.rate = rate;
-		}
-		public double getMonthlyPayment() {
-			return monthlyPayment;
-		}
-		public void setMonthlyPayment(double monthlyPayment) {
-			this.monthlyPayment = monthlyPayment;
-		}
-	    
+	private String vin_number;
 
-	    @Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Car other = (Car) obj;
-			if (VIN != other.VIN)
-				return false;
-			if (make == null) {
-				if (other.make != null)
-					return false;
-			} else if (!make.equals(other.make))
-				return false;
-			if (mileage != other.mileage)
-				return false;
-			if (model == null) {
-				if (other.model != null)
-					return false;
-			} else if (!model.equals(other.model))
-				return false;
-			if (Double.doubleToLongBits(monthlyPayment) != Double.doubleToLongBits(other.monthlyPayment))
-				return false;
-			if (owner == null) {
-				if (other.owner != null)
-					return false;
-			} else if (!owner.equals(other.owner))
-				return false;
-			if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-				return false;
-			if (Double.doubleToLongBits(rate) != Double.doubleToLongBits(other.rate))
-				return false;
-			if (year != other.year)
-				return false;
-			return true;
-		}
+	private String make;
 
-	    @Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + VIN;
-			result = prime * result + ((make == null) ? 0 : make.hashCode());
-			result = prime * result + mileage;
-			result = prime * result + ((model == null) ? 0 : model.hashCode());
-			long temp;
-			temp = Double.doubleToLongBits(monthlyPayment);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			result = prime * result + ((owner == null) ? 0 : owner.hashCode());
-			temp = Double.doubleToLongBits(price);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			temp = Double.doubleToLongBits(rate);
-			result = prime * result + (int) (temp ^ (temp >>> 32));
-			result = prime * result + year;
-			return result;
-		}
-	    @Override
-		public String toString() {
-			return "Car [owner=" + owner + ", VIN=" + VIN + ", model=" + model + ", make=" + make + ", year=" + year
-					+ ", mileage=" + mileage + ", price=" + price + ", rate=" + rate + ", monthlyPayment="
-					+ monthlyPayment + "]";
-		}
-   
+	private String model;
+
+	private int mileage;
+
+	private int year;
+
+	private double price;
+
+	private double rate;
+
+	private double monthly_payment;
+
+	private String current_status;
+
+	public String getCurrent_status() {
+		return current_status;
+	}
+
+	public void setCurrent_status(String current_status) {
+		this.current_status = current_status;
+	}
+
+	
+//Constructors
+	public Car() {
+		super();
+	}
+
+	public Car(int car_id, String vin_number, String make, String model, int mileage, int year, double price,
+			double rate, double monthly_payment, String current_status) {
+		super();
+		this.car_id = car_id;
+		this.vin_number = vin_number;
+		this.make = make;
+		this.model = model;
+		this.mileage = mileage;
+		this.year = year;
+		this.price = price;
+		this.rate = rate;
+		this.monthly_payment = monthly_payment;
+		this.current_status = current_status;
+	}
+
+	//getter and setter methods
+	public int getCar_id() {
+		return car_id;
+	}
+
+	public void setCar_id(int car_id) {
+		this.car_id = car_id;
+	}
+
+	public String getVin_number() {
+		return vin_number;
+	}
+
+	public void setVin_number(String vin_number) {
+		this.vin_number = vin_number;
+	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	public double getMonthly_payment() {
+		return monthly_payment;
+	}
+
+	public void setMonthly_payment(double monthly_payment) {
+		this.monthly_payment = monthly_payment;
+	}
+	
+	//to string Method
+	@Override
+	public String toString() {
+		return "Car [car_id=" + car_id + ", vin_number=" + vin_number + ", make=" + make + ", model=" + model
+				+ ", mileage=" + mileage + ", year=" + year + ", price=" + price + ", rate=" + rate
+				+ ", monthly_payment=" + monthly_payment + ", current_status=" + current_status + "]";
+	}
 
 }

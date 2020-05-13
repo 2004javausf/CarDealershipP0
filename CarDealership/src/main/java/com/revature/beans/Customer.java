@@ -1,158 +1,167 @@
 package com.revature.beans;
 
-import java.util.ArrayList;
+public class Customer {
 
-public class Customer extends User {
-	//fields
-	private int custID;
-    private String address;
-    private String city;
-    private String state;
-    private String postalCode;
-    private String phoneNumber;
-    private String email;
-    private int creditScore;
-    private double cashOnHand;
-    private ArrayList<Integer> carsOwned;
-    private int deleted;
+	private int customer_id;
 
-    //Constructors
-    public Customer() {
-        super();
+	private String username;
 
-    }
+	private String firstname;
 
-    public Customer(int custID, String address, String city, String state, String postalCode, String phoneNumber,
-			String email, int creditScore, double cashOnHand, ArrayList<Integer> carsOwned, int deleted) {
+	private String lastname;
+
+	private String email;
+
+	private String address;
+
+	private double cash_on_hand;
+
+	private String city;
+
+	private int credit_score;
+
+	private String password;
+
+	private String phone_number;
+
+	private String postal_code;
+
+	private String state;
+
+	public Customer() {
 		super();
-		this.custID = custID;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.postalCode = postalCode;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.creditScore = creditScore;
-		this.cashOnHand = cashOnHand;
-		this.carsOwned = carsOwned;
-		this.deleted = deleted;
 	}
 
+	
 
-    //Getters and Setters
-    public int getCustID() {
-        return custID;
-    }
+	public Customer(int customer_id, String username, String password, String firstname, String lastname, String email, String address, String city, String state, String postal_code, int credit_score, double cash_on_hand, String phone_number
+			) {
+		super();
+		this.customer_id = customer_id;
+		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.address = address;
+		this.cash_on_hand = cash_on_hand;
+		this.city = city;
+		this.credit_score = credit_score;
+		this.password = password;
+		this.phone_number = phone_number;
+		this.postal_code = postal_code;
+		this.state = state;
+	}
 
+	public int getCustomer_id() {
+		return customer_id;
+	}
 
-    public void setCustID(int custID) {
-        this.custID = custID;
-    }
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
+	}
 
+	public String getUsername() {
+		return username;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
+	public String getFirstname() {
+		return firstname;
+	}
 
-    public void setAddress(String address) {
-        address += "Dealership City ";
-        this.address = address;
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
+	public String getLastname() {
+		return lastname;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
+	public String getEmail() {
+		return email;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getState() {
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public double getCash_on_hand() {
+		return cash_on_hand;
+	}
+
+	public void setCash_on_hand(double cash_on_hand) {
+		this.cash_on_hand = cash_on_hand;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public int getCredit_score() {
+		return credit_score;
+	}
+
+	public void setCredit_score(int credit_score) {
+		this.credit_score = credit_score;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+
+	public String getPostal_code() {
+		return postal_code;
+	}
+
+	public void setPostal_code(String postal_code) {
+		this.postal_code = postal_code;
+	}
+
+	public String getState() {
 		return state;
 	}
 
 	public void setState(String state) {
 		this.state = state;
 	}
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-
-    public String getEmail() {
-        return email;
-    }
-
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public double getCashOnHand(){
-        return cashOnHand;
-    }
-
-    public void setCashOnHand(double cashOnHand){
-        cashOnHand += 500.00;
-        this.cashOnHand = cashOnHand;
-    }
-    
-
-	public ArrayList<Integer> getCarsOwned() {
-		return carsOwned;
-	}
-
-	public void setCarsOwned(ArrayList<Integer> carsOwned) {
-		this.carsOwned = carsOwned;
-	}
 	
-    public int getDeleted() {
-        return deleted;
-    }
+	@Override
+	public String toString() {
+		return "Customer [customer_id=" + customer_id + ", username=" + username + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", email=" + email + ", address=" + address + ", cash_on_hand="
+				+ cash_on_hand + ", city=" + city + ", credit_score=" + credit_score + ", password=" + password
+				+ ", phone_number=" + phone_number + ", postal_code=" + postal_code + ", state=" + state + "]";
+	}
 
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
-    }
-
-    public int getCreditScore() {
-        return creditScore;
-    }
-
-    public void setCreditScore(int creditScore) {
-        this.creditScore = creditScore;
-    }
-
-    //to String method
-    @Override
-    public String toString() {
-        return "Customer{" +
-        		"custID= '" + custID + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", creditScore=" + creditScore +
-                ", cashOnHand=" + cashOnHand +
-                '}';
-    }
 }

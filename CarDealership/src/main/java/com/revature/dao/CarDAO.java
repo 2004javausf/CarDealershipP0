@@ -1,21 +1,20 @@
 package com.revature.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.revature.beans.Car;
 
 public interface CarDAO {
-		
-	//Create
-		public void createCar(String VIN, String make, String model, int year, int mileage, double price, String status)
-				throws SQLException;
-		
-		//Read All
-		public List<Car> getCarList()throws SQLException;
 
-		
+	public void createCar(String vin_number, String make, String model, int mileage, int year, double price,
+			double rate, double monthly_payment);
 
-		
+	public void removeCarFromLot(int car_id);
+
+	public void addCarToLot(int car_id);
+	
+	public Car getCarById(int car_id);
+	
+	public List<Car> getCarsOnLot();
 
 }

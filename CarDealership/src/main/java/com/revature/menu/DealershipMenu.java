@@ -13,16 +13,17 @@ import com.revature.daoImpl.EmployeeDAOImpl;
 
 public class DealershipMenu {
 	public static Scanner sc = new Scanner(System.in);
-        EmployeeDAOImpl edi = new EmployeeDAOImpl();
-        CustomerDAOImpl cdi = new CustomerDAOImpl();
-		CarDAOImpl cadi = new CarDAOImpl();
-        int menuOption = 0;
-        System.out.println("Welcome to the Yates' Dealership please choose from the following options (Press 0 for menu) \n\n");
+    EmployeeDAOImpl edi = new EmployeeDAOImpl();
+    CustomerDAOImpl cdi = new CustomerDAOImpl();
+	CarDAOImpl cadi = new CarDAOImpl();
+    int menuOption = 0;
+        
 
         
 
     
     public static void displayMenu(int menuOption) {
+    	System.out.println("Welcome to the Yates' Dealership please choose from the following options (Press 0 for menu) \n\n");
         System.out.println("What would you like to do?");
         System.out.println("----------------------------------------------------------------");
         System.out.println("1. Sign in as a customer.");
@@ -37,11 +38,11 @@ public class DealershipMenu {
             break;
         case 1:
             System.out.println("Customer Login");
-            new CustomerMenu().render(menuOption);
+            new CustomerMenu().render(sc);
             break;
         case 2:
             System.out.println("Employee Login");
-            new EmpLogin().render(menuOption);
+            new EmployeeLogin().render(menuOption);
             break;
         case 3:
             System.out.println("Thank you for stopping by. Please come again.");
